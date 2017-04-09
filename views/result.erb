@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результат</title>
+  <link rel="stylesheet" type="text/css" href="css/application.css">
+</head>
+
+<% unless params['pay-off'] == 'Usual' || params['pay-off'] == 'Equal' %>
+    <p>is error credit type</p>
+<% end %>
+
+<body class="buffer-left buffer-bot">
+<% require_relative '../lib/credit_calculator' %>
+<% if defined?(params) && (params['pay-off'] == 'Usual' || params['pay-off'] == 'Equal') %>
+    <% credit_calculator = CreditCalculator.new(params) %>
+    <% sums = credit_calculator.credit_off %>
+
+    <% unless sums.last.last.to_f == 0 && sums.last[2].to_f != 0 %>
+        <p>not valid values</p>
+    <% end %>
+
+    <% if sums.last.last.to_f == 0 && sums.last[2].to_f != 0 %>
+
+        <p>Процентная ставка: <%= credit_calculator.percent_for_show %> %</p>
+        <p>Сумма кредита: <%= credit_calculator.credit_sum %></p>
+
+        <table class="result-table">
+          <tr>
+            <th>номер месца</th>
+            <th>погашение кредита</th>
+            <th>погашение %</th>
+            <th>общий взнос</th>
+            <th>остаток кредита</th>
+          </tr>
+          <% sums.each_with_index do |v, index| %>
+              <tr>
+                <th align="left"><%= index + 1 %></th>
+                <th><%= v[0] %></th>
+                <th><%= v[1] %></th>
+                <th><%= v[2] %></th>
+                <th><%= v[3] %></th>
+              </tr>
+          <% end %>
+
+          <tr>
+            <th></th>
+            <th><%= credit_calculator.credit_sum %></th>
+            <th><%= credit_calculator.global_percent_sum %></th>
+            <th><%= credit_calculator.global_sum %></th>
+            <th></th>
+          </tr>
+        </table>
+    <% end %>
+<% end %>
+</body>
+</html>
