@@ -44,19 +44,19 @@ describe 'CreditCalculator' do
 
   it 'credit_off' do
     # проверяю, если тип кредита стандартный, то вернет standart_credit_off
-    params['payOff'] = 'Usual'
+    params['pay-off'] = 'Usual'
     credit_calculator = CreditCalculator.new(params)
     credit_calculator2 = CreditCalculator.new(params)
     expect(credit_calculator.credit_off).to eq credit_calculator2.standard_type_off
 
     # проверяю, если тип кредита Аннуитентный (равными частями), то вернет annuity_credit_off
-    params['payOff'] = 'Equal'
+    params['pay-off'] = 'Equal'
     credit_calculator = CreditCalculator.new(params)
     credit_calculator2 = CreditCalculator.new(params)
     expect(credit_calculator.credit_off).to eq credit_calculator2.annuity_type_off
 
     # проверяю, что если в тип кредита передать ерунду, то вернет nil
-    params['payOff'] = 'trololo'
+    params['pay-off'] = 'trololo'
     credit_calculator = CreditCalculator.new(params)
     expect(credit_calculator.credit_off).to eq nil
   end
