@@ -19,7 +19,6 @@
 }
 
 .result-table {
-  width: 500px; /* Ширина таблицы */
   border-collapse: collapse; /* Убираем двойные линии между ячейками */
   border: 1px solid #B0C4DE;
   background-color: #EFEFEF;
@@ -29,6 +28,10 @@
   text-align: center;
   padding: 7px; /* Поля вокруг содержимого таблицы */
   border: #DBDBDB solid 1px; /* Параметры рамки */
+}
+
+.result-table th {
+  padding: 10px;
 }
 
 .index-table {

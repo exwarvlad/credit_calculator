@@ -16,7 +16,7 @@
 <body class="buffer-left buffer-bot">
 <% require_relative '../lib/credit_calculator' %>
 <% if defined?(params) && (params['pay-off'] == 'Usual' || params['pay-off'] == 'Equal') %>
-    <% credit_calculator = CreditCalculator.new(params) %>
+    <% credit_calculator = CreditCalculator.new(@params) %>
     <% sums = credit_calculator.credit_off %>
 
     <% unless sums.last.last.to_f == 0 && sums.last[2].to_f != 0 %>
