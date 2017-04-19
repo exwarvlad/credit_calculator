@@ -5,36 +5,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Кредитный онлайн-калькулятор</title>
-  <link rel="stylesheet" type="text/css" href="css/application.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/application.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="javascript/application.js"></script>
 </head>
 
 <h3>Кредитный онлайн-калькулятор</h3>
 
 <form action="result" method="post" target="graphic">
-  <table cellspacing="7">
+  <table cellspacing="7" class="index-table" id="table">
     <tr>
       <td><strong>Кредитные сведения:</strong></td>
     </tr>
 
     <tr>
       <td><label for="percent">Процентная ставка (%):</label></td>
-      <td><input type="text" name="percent" id="percent"></td>
+      <td><input class="hover" type="text" name="percent"></td>
     </tr>
 
     <tr>
       <td></td>
-      <td class="color-red">Внимание: Данные вводятся через точку!</td>
+      <td class="color-content">Внимание: Данные вводятся через точку!</td>
     </tr>
 
     <tr>
       <td class="buffer-top">Сумма кредита:</td>
-      <td class="buffer-top"><label for="credit"><input type="text" name="credit_sum"></label></td>
+      <td class="buffer-top"><label for="credit"><input class="hover" type="text" name="credit_sum"></label></td>
     </tr>
 
     <tr>
-      <td>
-        <lable>Метод погашения кредита</lable>
-      </td>
+      <td>Метод погашения кредита</td>
 
       <td>
         <input type="radio" name="pay-off" id="Usual" value="Usual" checked>
@@ -50,12 +51,12 @@
       <td>
         <label for="term">Срок кредита (в месяцах):</label>
       </td>
-      <td><input type="text" name="term"></td>
+      <td><input class="hover" type="text" name="term"></td>
     </tr>
 
     <tr>
       <td><strong>График платежей:</strong></td>
-      <td><input type="submit" value="Построить"></td>
+      <td><input type="submit" value="Построить" id="submit"></td>
     </tr>
   </table>
 </form>

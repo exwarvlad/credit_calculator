@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Результат</title>
-  <link rel="stylesheet" type="text/css" href="css/application.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/application.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 
 <% unless params['pay-off'] == 'Usual' || params['pay-off'] == 'Equal' %>
@@ -24,8 +25,8 @@
 
     <% if sums.last.last.to_f == 0 && sums.last[2].to_f != 0 %>
 
-        <p>Процентная ставка: <%= credit_calculator.percent_for_show %> %</p>
-        <p>Сумма кредита: <%= credit_calculator.credit_sum %></p>
+        <p class="buffer-top-10">Процентная ставка: <%= credit_calculator.percent_for_show %> %</p>
+        <p class="buffer-bot">Сумма кредита: <%= credit_calculator.credit_sum %></p>
 
         <table class="result-table">
           <tr>
@@ -37,20 +38,20 @@
           </tr>
           <% sums.each_with_index do |v, index| %>
               <tr>
-                <th align="left"><%= index + 1 %></th>
-                <th><%= v[0] %></th>
-                <th><%= v[1] %></th>
-                <th><%= v[2] %></th>
-                <th><%= v[3] %></th>
+                <td style="text-align: left"><%= index + 1 %></td>
+                <td><%= v[0] %></td>
+                <td><%= v[1] %></td>
+                <td><%= v[2] %></td>
+                <td><%= v[3] %></td>
               </tr>
           <% end %>
 
           <tr>
-            <th></th>
-            <th><%= credit_calculator.credit_sum %></th>
-            <th><%= credit_calculator.global_percent_sum %></th>
-            <th><%= credit_calculator.global_sum %></th>
-            <th></th>
+            <td></td>
+            <td><%= credit_calculator.credit_sum %></td>
+            <td><%= credit_calculator.global_percent_sum %></td>
+            <td><%= credit_calculator.global_sum %></td>
+            <td></td>
           </tr>
         </table>
     <% end %>

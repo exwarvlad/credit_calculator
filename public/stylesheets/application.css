@@ -1,0 +1,53 @@
+.color-content{
+  color: red;
+}
+
+.buffer-top {
+  padding-top: 25px;
+}
+
+.buffer-top-10 {
+  padding-top: 10px;
+}
+
+.buffer-left {
+  padding-left: 10px;
+}
+
+.buffer-bot {
+  padding-bottom: 10px;
+}
+
+.result-table {
+  width: 500px; /* Ширина таблицы */
+  border-collapse: collapse; /* Убираем двойные линии между ячейками */
+  border: 1px solid #B0C4DE;
+  background-color: #EFEFEF;
+}
+
+.result-table td {
+  text-align: center;
+  padding: 7px; /* Поля вокруг содержимого таблицы */
+  border: #DBDBDB solid 1px; /* Параметры рамки */
+}
+
+.index-table {
+  border: 1px solid #B0C4DE;
+  border-radius: 7px;
+  background-color: #EFEFEF;
+}
+
+body {
+  padding-left: 5px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+p {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.table-hover, .hovered:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: .3s;
+}
