@@ -10,7 +10,7 @@ get '/' do
 end
 
 post '/result' do
-  params_handler(params, 'percent', 'credit_sum', 'term')
+  params_handler('percent', 'credit_sum', 'term')
   MAX_CREDIT = 999999999999999
   MAX_PERCENT = 99999999999999
   param :percent, Float, min: 0, max: MAX_PERCENT, blank: false
