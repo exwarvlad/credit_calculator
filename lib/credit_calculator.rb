@@ -1,13 +1,15 @@
 # Класс для выщитывание ежемесячных ориентировачных сум платежей по кредиту
+require 'bigdecimal'
+
 class CreditCalculator
   attr_reader :global_sum, :global_percent_sum, :credit_sum, :percent_for_show
 
   def initialize(params)
-    @percent = params['percent'].to_f
+    @percent = BigDecimal params['percent']
     @percent_for_show = round_num(@percent)
-    @credit_sum = params['credit_sum'].to_f
+    @credit_sum = BigDecimal params['credit_sum']
     @pay_off = params['pay-off']
-    @credit_time = params['term'].to_i
+    @credit_time = BigDecimal params['term']
   end
 
   # выберает тип погашения кредита, взависимости от переданного параметра params['pay-off']
@@ -29,18 +31,18 @@ class CreditCalculator
     @global_percent_sum = 0 # сумма погашение % за весь период
     @global_sum = 0 # общий взнос за весь период
 
-    @credit_time.times do |count|
+    @credit_time.to_i.times do |count|
       array = []
       credit_sum = (@credit_sum - loan_repayment * count) # остаток кредита
-      amount_percent = (credit_sum * @percent / 12.to_f) / 100 # сумма погашение %
-      sum_per_month = loan_repayment.round(2) + amount_percent.round(2) # общий взнос
+      amount_percent = (credit_sum * @percent / 12) / 100 # сумма погашение %
+      sum_per_month = loan_repayment + amount_percent # общий взнос
 
       # остаток кредита с учётом взноса
       credit_sum2 = (@credit_sum - loan_repayment * (count + 1))
 
       # создаю новый массив со сзначениеми текущего месяца и запушиваю в sums
       array.push(round_num(loan_repayment), round_num(amount_percent),
-                 round_num(sum_per_month), round_num(credit_sum2))
+                 round_num(sum_per_month), round_num(credit_sum2.abs))
 
       sums.push(array)
 
@@ -73,7 +75,7 @@ class CreditCalculator
 
     credit_sum = @credit_sum
 
-    @credit_time.times do
+    @credit_time.to_i.times do
       array = []
 
       percent_sum = credit_sum * p # сумма погашение в %
@@ -91,12 +93,13 @@ class CreditCalculator
     sums
   end
 
-  private
+
 
   # добавляет к числу - 0, если оно не округленно до сотых и добавляет отступы,
   # для удобства
   def round_num(num)
-    n = '%.2f' % num
-    n.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
+    n = BigDecimal("#{num}")
+    n = (n.truncate(2).to_s("F") + "00")[ /.*\..{2}/ ]
+    n.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1 ')
   end
 end

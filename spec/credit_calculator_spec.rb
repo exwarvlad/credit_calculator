@@ -60,4 +60,9 @@ describe 'CreditCalculator' do
     credit_calculator = CreditCalculator.new(params)
     expect(credit_calculator.credit_off).to eq nil
   end
+
+  it 'round_num' do
+    num = 999999999999999999999999
+    expect(credit_calculator.round_num(num)).to eq '999 999 999 999 999 999 999 999.00'
+  end
 end
